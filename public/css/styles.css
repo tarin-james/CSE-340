@@ -1,6 +1,179 @@
 /******* Change Box Model ***************/
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root {
+  --bodyfont: 'Inter', sans-serif;
+  --blue: #1181cc;
 }
+
+body {
+  font-family: var(--bodyfont);
+  margin: 0;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 40px;
+ 
+}
+
+#tools a {
+  text-decoration: none;
+  color: black;
+}
+
+#tools a:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+.siteName a{
+  font-size: xx-large;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: black;
+}
+
+nav a {
+  text-align: center;
+  padding: 20px 10px;
+  width: 100%;
+  text-decoration: none;
+  color: white;
+  background-color: black;
+
+}
+
+nav a:hover{
+  background-color: var(--blue);
+
+  
+}
+
+#details-hero {
+  background-color: white ;
+}
+
+#hero-image {
+  max-width: 100%;
+  width: 100%;
+}
+
+.hero {
+  position: relative;
+}
+#hero-info {
+  top: 0;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+}
+#hero-box {
+  z-index: -1;
+  margin-bottom: -4px;
+}
+
+.cta-button img {
+  width: 150px;
+  text-align: center;
+}
+
+#hero-info h2{
+  font-weight: bolder;
+  color: var(--blue);
+}
+
+#hero-info ul{
+  list-style-type: none;
+  padding: 0;
+  color: var(--blue);
+  font-weight: bold;
+}
+
+.reviews h3 {
+  font-weight: bold;
+}
+
+.reviews ul {
+  line-height: 2;
+}
+
+#upgrades-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row: 1fr 1fr;
+}
+
+.upgrade-item img {
+  width: 40%;
+  height: 70px;
+}
+
+.upgrade-item {
+  text-align: center;
+}
+
+.upgrade-item-img {
+  background-color: var(--blue);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: solid 2px black;
+  margin: 5px;
+
+}
+
+@media screen and (min-width: 500px){
+  body {
+    background: url(../images/site/checkerboard.jpg);
+    max-width: 800px;
+    margin: 0 auto;
+    background-size: contain;
+  }
+  
+  #content{
+    background-color: white;
+    margin: 30px 20px;
+    border: solid 5px var(--blue);
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  #wrapper {
+    background-color: white;
+  }
+
+  #bigview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .upgrades {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .reviews {
+    grid-column: 2;
+  }
+
+  header {
+    align-self: center;
+  }
+}
+
