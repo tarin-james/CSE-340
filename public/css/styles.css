@@ -39,27 +39,41 @@ header {
 }
 
 nav {
-  display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   background-color: black;
 }
 
-nav a {
+nav li {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   padding: 20px 10px;
   width: 100%;
   text-decoration: none;
   color: white;
   background-color: black;
+  align-items: center;
+
 
 }
 
-nav a:hover{
-  background-color: var(--blue);
+nav a {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+}
 
-  
+nav ul {
+  display:flex;  
+  flex-direction: row;
+  margin: 0 auto;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+nav li:hover{
+  background-color: var(--blue);
 }
 
 #details-hero {
