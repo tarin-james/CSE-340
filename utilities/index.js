@@ -1,5 +1,18 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
+// Create our number formatter.
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 /* ************************
  * Constructs the nav HTML unordered list
@@ -59,6 +72,22 @@ Util.buildClassificationGrid = async function(data){
     return grid
   }
 
+
+  Util.buildInventoryDetails = async function(data){
+    let details = '';
+    if(data.inv_id){
+      details +=`<h1 id='year-make-model'>${data.inv_year} ${data.inv_make} ${data.inv_model}</h1>`
+      details += `<div id='details_wrapper'> <img id='details_image' src= ${data.inv_image}>`
+      details += `<div id='car_specs'><h2 id='details_description_title'>${data.inv_make} ${data.inv_model} Details</h2>`
+      details += `<p id= 'details_price'><strong>Price: </strong>${formatter.format(data.inv_price)}</p>`
+      details += `<p id='details_description'><strong>Description: </strong>${data.inv_description}</p>`
+      details += `<p id='details_color'><strong>Color: </strong>${data.inv_color}</p>`
+      details += `<p id='details_miles'><strong>Miles: </strong>${numberWithCommas(data.inv_miles)}</p></div></div>`
+    } else { 
+      details += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+    }
+    return details
+  }
 
   /* ****************************************
  * Middleware For Handling Errors
