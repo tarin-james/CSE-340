@@ -77,7 +77,7 @@ Util.buildClassificationGrid = async function(data){
     let details = '';
     if(data.inv_id){
       details +=`<h1 id='year-make-model'>${data.inv_year} ${data.inv_make} ${data.inv_model}</h1>`
-      details += `<div id='details_wrapper'> <img id='details_image' src= ${data.inv_image}>`
+      details += `<div id='details_wrapper'> <img id='details_image' src= ${data.inv_image} alt='Picture of Vehicle'>`
       details += `<div id='car_specs'><h2 id='details_description_title'>${data.inv_make} ${data.inv_model} Details</h2>`
       details += `<p id= 'details_price'><strong>Price: </strong>${formatter.format(data.inv_price)}</p>`
       details += `<p id='details_description'><strong>Description: </strong>${data.inv_description}</p>`
