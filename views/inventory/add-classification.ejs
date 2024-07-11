@@ -1,0 +1,10 @@
+<h1><%- title %></h1>
+<form id="add-classification" action="/inv/new-classification" method="post">
+    <legend id="classificationLegend">FIELD IS REQUIRED</legend>
+    <fieldset id="add-classificationBox">
+        <h2>Classification Name</h2>
+        <span>NAME MUST BE ALPHABETIC CHARACTERS ONLY</span>
+        <input name="addClassification" type="text" pattern="[A-Za-z]+" required>
+        <button>Add Classification</button>
+    </fieldset>
+</form>

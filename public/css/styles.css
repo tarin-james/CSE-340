@@ -48,7 +48,7 @@ nav li {
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 20px 8px;
+  padding: 20px 0px;
   width: 100%;
   text-decoration: none;
   color: white;
@@ -197,7 +197,112 @@ width: 100%;
   padding-top: 10px;
 }
 
+.notice li{
+  color: red;
+  font: bold;
+}
 
+#loginBox {
+  width: 215px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+#loginBox label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#loginButton {
+  margin-top: 10px;
+  border-radius: 10px;
+  width: 60px;
+}
+
+#registerButton {
+  margin-top: 10px;
+  border-radius: 10px;
+  width: 100px;
+}
+
+#registrationBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+#registrationBox label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#registrationBox span {
+  text-align: center;
+}
+
+#managementUL {
+  list-style: none;
+}
+
+#managementUL li {
+  padding: 3px;
+}
+
+#add-classification {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  
+}
+
+#add-classificationBox {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  border-radius: 10px;
+  border: solid black;
+}
+
+#add-classificationBox {
+  padding: 8px;
+}
+
+#add-classificationBox h2, span, input, button {
+  margin: 3px;
+}
+
+#add-inventory {
+  display: flex;
+  flex-direction: column;
+}
+
+#inventoryBox {
+  display: flex;
+  flex-direction: column;
+}
+
+input:valid {
+  background-color: rgb(187, 248, 187);
+
+}
+
+input:invalid:focus {
+  background-color: rgb(245, 134, 134);
+}
 
 @media screen and (min-width: 500px){
   body {
@@ -247,6 +352,8 @@ width: 100%;
     grid-template-columns: 1fr 1fr 1fr;
   }
   
- 
+  #loginBox {
+    width: 300px;
+  }
 }
 

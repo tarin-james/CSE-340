@@ -1,0 +1,10 @@
+<h1><% title %></h1>
+<%- messages() %>
+<form id="loginForm" action="/account/login" method="post">
+    <fieldset id="loginBox">
+        <label>Email: <input type="Email" id="emailForm" required></label>
+        <label>Password: <input type="password" id="password" required></label>
+        <button type="submit" id="loginButton">Login</button>
+        <p>No Account?<a href="registration"> Sign-Up</a></p>
+    </fieldset>
+</form>
