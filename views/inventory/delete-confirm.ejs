@@ -1,0 +1,28 @@
+<h1><%- title %></h1>
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+<form id="add-inventory" action="/inv/delete-item" method="post">
+    <legend>ALL FIELDS ARE REQUIRED</legend>
+    <fieldset id="inventoryBox">
+        <label>Make</label>
+        <input type="text"  readonly name="inv_make" placeholder="Min of 3 Characters" minlength="3" required value=<%- locals.inv_make %> >
+        <label>Model</label>
+        <input type="text" readonly name="inv_model" placeholder="Min of 3 Characters" minlength="3" required  value=<%-  locals.inv_model %> >
+        <label>Price</label>
+        <input type="text" readonly name="inv_price" pattern="[0-9]*\.[0-9]+" placeholder="Decimal or Integer" required value=<%- locals.inv_price %> >
+        <label>Year</label>
+        <input type="text" readonly name="inv_year" pattern="\d+" maxlength="4" placeholder="4-digit Year" required value=<%- locals.inv_year %> >
+        <p>Confirm Deletion - The delete is permanent.</p>
+        <button type="submit">Delete Vehicle</button>
+        <input type="hidden" name="inv_id"
+
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
+
+    </fieldset>
+</form>

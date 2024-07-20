@@ -2,8 +2,8 @@
 <%- messages() %>
 <form id="loginForm" action="/account/login" method="post">
     <fieldset id="loginBox">
-        <label>Email: <input type="Email" id="emailForm" required></label>
-        <label>Password: <input type="password" id="password" required></label>
+        <label>Email: <input name="account_email" type="Email" id="emailForm" required></label>
+        <label>Password: <input name="account_password" type="password" id="password" required></label>
         <button type="submit" id="loginButton">Login</button>
         <p>No Account?<a href="registration"> Sign-Up</a></p>
     </fieldset>

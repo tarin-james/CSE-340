@@ -14,24 +14,23 @@ router.get(
   "/detail/:inventoryId",
   utilities.handleErrors(invController.buildByInvId)
 );
-router.get("/", utilities.handleErrors(invController.buildManagement));
-router.get(
-  "/add-classification",
-  utilities.handleErrors(invController.buildAddClassification)
+router.get("/", utilities.checkAccountType, utilities.handleErrors(invController.buildManagement));
+router.get( "/add-classification", utilities.checkAccountType, utilities.handleErrors(invController.buildAddClassification)
 );
-router.post(
-  "/new-classification",
-  utilities.handleErrors(invController.addClassification)
+router.post("/new-classification", utilities.handleErrors(invController.addClassification)
 );
-router.get(
-  "/add-inventory",
-  utilities.handleErrors(invController.buildAddInventory)
+router.get("/add-inventory", utilities.checkAccountType, utilities.handleErrors(invController.buildAddInventory)
 );
-router.post(
-  "/new-inventory",
-  invValidate.vehicleRules(),
-  invValidate.checkInvData,
-  utilities.handleErrors(invController.addInventory)
+router.post("/new-inventory", invValidate.vehicleRules(), invValidate.checkInvData, utilities.handleErrors(invController.addInventory)
 );
+router.get("/getInventory/:classification_id",  utilities.handleErrors(invController.getInventoryJSON))
+
+router.get("/edit/:inv_id", utilities.checkAccountType, utilities.handleErrors(invController.editInventoryView))
+
+router.post("/update/", utilities.handleErrors(invController.updateInventory))
+
+router.get("/delete/:inv_id", utilities.checkAccountType, utilities.handleErrors(invController.deleteConfirmationView))
+
+router.post("/delete-item", utilities.handleErrors(invController.deleteItem))
 
 module.exports = router;

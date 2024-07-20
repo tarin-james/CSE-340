@@ -1,0 +1,29 @@
+<h1><% title %></h1>
+<%- messages() %>
+
+  <form name="updatedAccountInfo" id="accountUpdate" action="/account/update-account" method="post">
+
+      <fieldset id="registrationBox">
+       <legend id="registerLegend">Account Information: </legend>
+           <label>First Name: <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.accountData.account_firstname %>"></label>
+           <label>Last Name: <input type="text" name="account_lastname" id="accountLastname" required value="<%= locals.accountData.account_lastname %>"></label>
+           <label>Email Address: <input type="email" name="account_email" id="accountEmail" required value="<%= locals.accountData.account_email %>"></label>
+           <input hidden value="<%= locals.accountData.account_id %>" name="account_id"/>
+           <button type="submit">Update Account Information</button>
+       </fieldset>
+
+  </form>
+
+
+  <form name="changedPassword" id="registrationBox" action="/account/changed-password" method="post">
+
+      <fieldset id="registrationBox">
+        <legend id="registerLegend">Change Password: </legend>
+        <p>*Altering this field will change your current password.*</p>
+        <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>
+        <label>Password: <input type="password" name="account_password" id="accountPassword" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"></label>
+        <input type="text" hidden value="<%= locals.accountData.account_id %>" name="account_id"/>
+        <button type="submit">Change Password</button>
+      </fieldset>
+
+  </form>

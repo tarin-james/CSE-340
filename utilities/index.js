@@ -1,5 +1,7 @@
 const invModel = require("../models/inventory-model")
 const Util = {}
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 // Create our number formatter.
 const formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -94,4 +96,66 @@ Util.buildClassificationGrid = async function(data){
  * Wrap other function in this for 
  * General Error Handling
  **************************************** */
+/* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkJWTToken = (req, res, next) => {
+  if (req.cookies.jwt) {
+   jwt.verify(
+    req.cookies.jwt,
+    process.env.ACCESS_TOKEN_SECRET,
+    function (err, accountData) {
+     if (err) {
+      req.flash("Please log in")
+      res.clearCookie("jwt")
+      return res.redirect("/account/login")
+     }
+     res.locals.accountData = accountData
+     res.locals.loggedin = 1
+     next()
+    })
+  } else {
+   next()
+  }
+ }
+
+Util.checkAccountType = (req, res, next) => {
+  if ((res.locals.accountData.account_type == 'Employee' || res.locals.accountData.account_type == 'Admin') && res.locals.loggedin){
+    next()
+  }else {
+    req.flash("notice", "Invalid Permissions")
+    return res.redirect("/account/login")
+  }
+}
+
+/* ****************************************
+ *  Check Login
+ * ************************************ */
+Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+    req.flash("notice", "Please log in.")
+    return res.redirect("/account/login")
+  }
+ }
+
+ Util.buildClassificationList = async function (classification_id = '') {
+  let data = await invModel.getClassifications()
+  let list = `<select id='classificationList' name='classification_id' value="${classification_id}">`
+  list += `<option  selected disabled hidden>Choose Classification</option>`
+  data.rows.forEach((row) => {
+    list += `<option value='${row.classification_id}'>`
+    list += row.classification_name
+    list += "</option>"
+  })
+  list += "</select>"
+  return list
+}
+
+
+
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+
+
