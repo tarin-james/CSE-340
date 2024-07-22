@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const accountModel = require("../models/account-model")
 const Util = {}
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -128,6 +129,15 @@ Util.checkAccountType = (req, res, next) => {
   }
 }
 
+Util.checkAdmin = (req, res, next) => {
+  if (res.locals.accountData.account_type == 'Admin') {
+    next()
+  }else {
+    req.flash("notice", "Invalid Permissions")
+    return res.redirect("/account/login")
+  }
+}
+
 /* ****************************************
  *  Check Login
  * ************************************ */
@@ -152,6 +162,7 @@ Util.checkLogin = (req, res, next) => {
   list += "</select>"
   return list
 }
+
 
 
 

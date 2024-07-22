@@ -17,6 +17,8 @@ router.get("/logout", utilities.handleErrors(accountController.accountLogout))
 router.get("/update-account", utilities.handleErrors(accountController.buildUpdateAccount))
 router.post("/update-account", regValidate.accountUpdateRules(), regValidate.checkUpdatedAccount, utilities.handleErrors(accountController.updateAccountInfo))
 router.post("/changed-password", regValidate.changedPasswordRules(), regValidate.checkChangedPassword, utilities.handleErrors(accountController.changePassword))
+router.get("/account-permissions", utilities.checkAdmin, utilities.handleErrors(accountController.buildAccountPermissions))
+router.post("/account-permissions", regValidate.accountPermissionUpdate(), regValidate.checkUpdatedPermissionEmail, utilities.handleErrors(accountController.updateAccountPermissions))
 
 
 module.exports = router;

@@ -236,4 +236,55 @@ async function changePassword (req, res, next) {
   
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManager, accountLogout, buildUpdateAccount, updateAccountInfo, changePassword }
+async function buildAccountPermissions(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("account/account-permissions" , {
+    title: "Account Permissions",
+    nav,
+    errors:null,
+  
+  })
+}
+
+async function updateAccountPermissions (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    account_type,
+    account_email
+
+  } = req.body
+  const updateResult = await accountModel.updatePermissions(
+    account_type,
+    account_email
+  )
+
+  if (updateResult) {
+   
+    req.flash("notice", `The account was successfully updated.`)
+    res.status(200).render("account/accountManagement", 
+      {
+        title: "Account Permissions ",
+        nav,
+        error: null,
+        account_type,
+        account_email
+
+      }
+    )
+  } else {
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("account/account-permissions", {
+      title: "Account Permissions ",
+      nav,
+      error: null,
+      account_type,
+      account_email
+    })
+  }
+
+
+}
+
+
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManager, accountLogout, buildUpdateAccount, updateAccountInfo, changePassword, buildAccountPermissions, updateAccountPermissions }

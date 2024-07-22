@@ -76,7 +76,19 @@ async function updatePassword(account_password, account_id)  {
     }
 }
 
+async function updatePermissions(account_type, account_email) {
+  try {
+  const sql = "UPDATE public.account SET account_type = $1 WHERE account_email = $2 RETURNING *"
+  const data = await pool.query(sql, [
+    account_type, account_email
+  ])
+  return data.rows[0]
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
 
 
 
-module.exports={ registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, updatePassword, getAccountId }
+
+module.exports={ registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, updatePassword, getAccountId, updatePermissions }

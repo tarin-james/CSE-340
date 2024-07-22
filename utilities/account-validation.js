@@ -49,6 +49,18 @@ validate.registrationRules = () => {
 };
 
 
+validate.accountPermissionUpdate = () => {
+  return [
+    body("account_email")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isEmail()
+      .normalizeEmail() // refer to validator.js docs
+      .withMessage("A valid email is required.")
+  ]
+}
+
 validate.accountUpdateRules = () => {
   return [
     // firstname is required and must be string
@@ -161,6 +173,24 @@ validate.checkLoginData = async (req, res, next) => {
 };
 
 
+validate.checkUpdatedPermissionEmail = async (req, res, next) => {
+  const { account_email } = req.body;
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    res.render("account/account-permissions", {
+      errors,
+      title: "Account Permissions",
+      nav,
+      account_email
+    });
+    return;
+  }
+  next();
+};
+
+
 validate.checkUpdatedAccount = async (req, res, next) => {
   const { account_firstname, account_lastname, account_email } = req.body;
   let errors = [];
@@ -213,5 +243,7 @@ validate.checkChangedPassword = async (req, res, next) => {
   }
   next();
 };
+
+
 
 module.exports = validate;
